@@ -6,13 +6,13 @@ import colors from './app/config/colors';
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style = {styles.primaryContainer}>
-        <View style = {styles.secondaryRect}>
+      <View style = {styles.darkPurpleRectangle}>
+        <View style = {styles.smallLightPurpleRectangle}>
           <Text style = {{fontWeight:'bold', fontSize: 26}}>React Native Assgn 1</Text>
         </View>
       </View>
       {/* Secondary Container */}
-      <View style = {styles.secondaryContainer}>
+      <View style = {styles.largeLightPurpleRectangle}>
         <View style = {styles.darkGreyRectangle}></View>
         <View style = {styles.darkGreyRectangle}></View>
         <View style = {styles.darkGreyRectangle}></View>
@@ -33,10 +33,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.lightGrey,
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 20,
     // justifyContent: 'center',
   },
-  primaryContainer: {
+  darkPurpleRectangle: {
     backgroundColor: colors.primary,
     flexDirection: 'row',
     // flex: 2,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
 
   },
-  secondaryRect: {
+  smallLightPurpleRectangle: {
     backgroundColor: colors.secondary,
     width: '90%',
     height: '65%',
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems:'center',
   },
-  secondaryContainer: {
+  largeLightPurpleRectangle: {
     backgroundColor: colors.secondary,
     flexDirection: 'row',
     // flex: 2,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     bottom: 35,
     right: 0,
     marginRight:'4%',
-    borderWidth: 3.5, 
+    borderWidth: 4.5, 
     borderColor: colors.darkGrey,
     
     
