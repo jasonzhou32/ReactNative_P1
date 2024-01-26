@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, TouchableHighlight, Text} from 'react-native';
 import colors from '../config/colors';
 
-function CustomRectangleButton({title="0", onPress}) {
+function CustomRectangleButton({title="0", onPress, color}) {
     return(
         <TouchableHighlight
             style={styles.button}
             onPress = {onPress}
             
-            underlayColor = 'red'
+            underlayColor = {color}
             >
             <Text style = {styles.text}>{title}</Text>
         </TouchableHighlight>

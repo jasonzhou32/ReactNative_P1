@@ -3,7 +3,10 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 import colors from './app/config/colors';
 import MyButton from './app/components/MyButton';
+import IconButton from './app/components/IconButton';
 import CustomRectangleButton from './app/components/CustomRectangleButton';
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 
 
@@ -15,12 +18,17 @@ export default function App() {
         onPress = {() => console.log("button pressed")}
         underlayColor = {colors.purple}
       >
-        <Text style = {styles.text}>Hi</Text>
+        <MaterialIcons name="school" size={24} color={colors.purple} style={styles.icon} />
       </TouchableHighlight>
-      <MyButton title = "1st" onPress={() => console.log("1st")}/>
+      <MyButton title = "1st" onPress={() => console.log("1st")} backgroundColor='yellow'/>
       <MyButton title = "2nd" onPress={() => console.log("2nd")}/>
       <MyButton onPress={() => console.log("None")}/>
-      <CustomRectangleButton title = "Rectangle" onPress={() => console.log("Rectangle Button Pressed")}/>
+      <CustomRectangleButton title = "Rectangle" onPress={() => console.log("Rectangle Button Pressed")} color = "red"/>
+      <MaterialIcons name="fastfood" size={24} color={colors.purple} style={styles.icon} />
+      <IconButton onPress={() => console.log("custom icon button")}/>
+      
+      
+      
       <StatusBar style="auto" />
     </View>
   );
@@ -50,5 +58,8 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 15,
     fontWeight: 'bold',
-  }
+  },
+  icon: {
+    margin: 10,
+  },
 });

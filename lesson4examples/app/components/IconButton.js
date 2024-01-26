@@ -1,9 +1,10 @@
 import React from 'react';
 import {StyleSheet, TouchableHighlight, Text} from 'react-native';
 import colors from '../config/colors';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-function MyButton({title="0", onPress, underlayColor = colors.purple,
-  backgroundColor = colors.pink, borderColor = colors.purple}) {
+function IconButton({title="0", onPress, underlayColor = colors.purple,
+  backgroundColor = colors.pink, borderColor = colors.purple, name = "food"}) {
     return(
         <TouchableHighlight
             style={[styles.button, {backgroundColor: backgroundColor, borderColor: borderColor}]}
@@ -11,7 +12,7 @@ function MyButton({title="0", onPress, underlayColor = colors.purple,
             
             underlayColor = {colors.purple}
             >
-            <Text style = {styles.text}>{title}</Text>
+            <MaterialCommunityIcons name={name}/>
         </TouchableHighlight>
     );
 }
@@ -43,4 +44,4 @@ const styles = StyleSheet.create({
       }
 });
 
-export default MyButton;
+export default IconButton;
