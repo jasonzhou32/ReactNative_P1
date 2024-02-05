@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
@@ -6,11 +7,13 @@ import Constants from 'expo-constants';
 import colors from './app/config/colors';
 import ListItem from './app/components/ListItem';
 import ListItemSeparator from './app/components/ListItemSeparator';
+import ListItemDeleteAction from './app/components/ListItemDeleteAction';
+
 
 export default function App() {
 
   // this is the array we will use for the example on FlatLists
-    const friends = [
+    const initialFriends = [
       {
         id: 1,
         name: "Kash",
@@ -37,6 +40,27 @@ export default function App() {
         favActivity: "Playing chess",
       },
     ]
+
+    const [friends, setFriends] = useState(initialFriends);
+
+    // friend is the input parameter
+    const handleDelete = friend => {
+      /*
+        Creating a new array that represents all friends
+        EXCEPT the one we clicked on. The filter method
+        will only return values that make the statement true.
+        Only return friend objects such that the id of the friend
+        is NOT EQUAL to the id of the friend we clicked on 
+        when this method was called.
+
+        Treat filter like a for each loop where f is the temp
+        variable to represent each friend as you loop through it.
+      */
+      const newFriends = friends.filter(f => f.id !== friend.id);
+      // Calling setFriends will change what friends is equal to
+      // and this will cause a rerender of the component.
+      setFriends(newFriends);
+    }
   
     return (
       <View style={styles.container}>
@@ -63,6 +87,10 @@ export default function App() {
               age = {item.age}
               favActivity = {item.favActivity}
               onPress = {() => console.log(item)}
+              renderRightActions={() =>
+                <ListItemDeleteAction onPress={() => handleDelete(item)} />}
+            
+
             />
           )}
           ItemSeparatorComponent={() => <ListItemSeparator color={colors.secondary}/>}

@@ -1,17 +1,25 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-
+import {Swipeable, GestureHandlerRootView} from 'react-native-gesture-handler';
 import colors from '../config/colors';
 
 
-function ListItem({name, age, favActivity, onPress}) {
+function ListItem({name, age, favActivity, onPress, renderRightActions}) {
   return(
-    <TouchableOpacity onPress = {onPress}>
-        <View style={styles.listItemContainer}>
-            <Text style={[styles.itemText, {fontSize: 16, fontWeight: 'bold'}]}>{name}, {age}</Text>
-            <Text style={[styles.itemText, {color: colors.secondary}]}>{favActivity}</Text>
-        </View>
-    </TouchableOpacity>
+    <GestureHandlerRootView>
+
+      <Swipeable renderRightActions = {renderRightActions}>
+        <TouchableOpacity onPress = {onPress}>
+          <View style={styles.listItemContainer}>
+              <Text style={[styles.itemText, {fontSize: 16, fontWeight: 'bold'}]}>{name}, {age}</Text>
+              <Text style={[styles.itemText, {color: colors.secondary}]}>{favActivity}</Text>
+          </View>
+        </TouchableOpacity>
+
+      </Swipeable>
+      
+    </GestureHandlerRootView>
+    
     
   );
 }
