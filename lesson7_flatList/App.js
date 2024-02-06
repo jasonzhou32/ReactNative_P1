@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View, TextInput } from 'react-native';
 
 import Constants from 'expo-constants';
 
@@ -8,6 +8,7 @@ import colors from './app/config/colors';
 import ListItem from './app/components/ListItem';
 import ListItemSeparator from './app/components/ListItemSeparator';
 import ListItemDeleteAction from './app/components/ListItemDeleteAction';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 
 export default function App() {
@@ -65,18 +66,23 @@ export default function App() {
     return (
       <View style={styles.container}>
         <Text style={[styles.text, {fontWeight: 'bold'}]}>My Friends</Text>
-       {/* First we will design ONE row of our FlatList*/}
-        {/* <View style={styles.listItemContainer}>
-          <Text style={[styles.itemText, {fontSize: 16, fontWeight: 'bold'}]}>Bob, 44</Text>
-          <Text style={[styles.itemText, {color: colors.secondary}]}>Hockey</Text>
-        </View> */}
-       {/* Then we will take this code and use it to build a ListItem component*/}
-       {/* Next we will add one ListItem component to ensure the code is how we want*/}
-       {/* <ListItem name="Jason" age="17" favActivity="Eating" onPress={() => console.log("pressed Jason")}/> */}
-       {/* Replace that code with a FlatList that has the array of friends as its data*/}
-       {/* Create a ListItemSeparator component that can go between ListItems */}
-  
-       {/* Begin to interact with our FlatList (more to come!) */}
+
+        <View style={styles.friendInputContainer}>
+          <View style={styles.inputRow}>
+            <Text>Name: </Text>
+            <TextInput style={styles.textInput}></TextInput>
+            <Text>Age: </Text>
+            <TextInput style={[styles.textInput, {width:50}]}></TextInput>
+          </View>
+          <View style={styles.inputRow}>
+            <Text>Fav Activity: </Text>
+            <TextInput style={[styles.textInput, {width:156}]}></TextInput>
+            
+          </View>
+
+          
+        </View>
+
   
         <FlatList
           data = {friends}
@@ -109,6 +115,30 @@ export default function App() {
       paddingTop: Constants.statusBarHeight,
       backgroundColor: colors.verylight,
       padding: 8,
+    },
+
+    friendInputContainer: {
+      backgroundColor: colors.medium,
+      height: 75,
+      width: '100%',
+      padding: 10,
+      marginBottom: 5,
+    },
+
+    inputRow:{
+      flexDirection: 'row',
+
+
+    },
+
+    textInput: {
+      height: 20,
+      width:100,
+      borderColor: 'black',
+      borderWidth: 1,
+      marginLeft: 5,
+      marginRight: 5,
+      backgroundColor: colors.light,
     },
 
     listItemContainer: {
