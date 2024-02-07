@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { FlatList, StyleSheet, Text, View, TextInput } from 'react-native';
+import { FlatList, StyleSheet, Text, View, TextInput, TouchableHighlight, Keyboard } from 'react-native';
 
 import Constants from 'expo-constants';
 
@@ -8,7 +8,6 @@ import colors from './app/config/colors';
 import ListItem from './app/components/ListItem';
 import ListItemSeparator from './app/components/ListItemSeparator';
 import ListItemDeleteAction from './app/components/ListItemDeleteAction';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 
 
 export default function App() {
@@ -44,8 +43,17 @@ export default function App() {
 
     const [friends, setFriends] = useState(initialFriends);
 
+
+    const [id, setId] = useState(initialFriends.length+1);
+
+    const[name, setName] = useState('');
+
+    const[age, setAge] = useState('')
+
+    const[favActivity, setFavActivity] = useState('');
+
     // friend is the input parameter
-    const handleDelete = friend => {
+    const handleDelete = (friend) => {
       /*
         Creating a new array that represents all friends
         EXCEPT the one we clicked on. The filter method
@@ -62,6 +70,34 @@ export default function App() {
       // and this will cause a rerender of the component.
       setFriends(newFriends);
     }
+
+    /*
+      This method is called when they are ready to add a friend
+      Create an object with the four state variables (id, name, age, favActivity)
+      call setFriends to update the array with this object at he end
+      Last, call setId to update the id value for next friend to be added
+    */
+
+    const handleAdd = () => {
+      const newFriend = {
+        id: id,
+        name: name,
+        age: age,
+        favActivity: favActivity,
+        
+      }
+
+      // ... is the spread operator
+      // essentially we are saying take the whole friends array
+      // add newFriend to the end
+      setFriends([...friends, newFriend]);
+      setId(id + 1);
+      setName('');
+      setAge('');
+      setFavActivity('');
+      Keyboard.dismiss();
+
+    }
   
     return (
       <View style={styles.container}>
@@ -69,16 +105,44 @@ export default function App() {
 
         <View style={styles.friendInputContainer}>
           <View style={styles.inputRow}>
-            <Text>Name: </Text>
-            <TextInput style={styles.textInput}></TextInput>
-            <Text>Age: </Text>
-            <TextInput style={[styles.textInput, {width:50}]}></TextInput>
+            <Text style={[styles.itemText, {marginLeft: 30}]}>Name: </Text>
+            <TextInput 
+              style={styles.textInput}
+              onChangeText={text => setName(text)}
+              value={name}
+              ></TextInput>
+            <Text style={[styles.itemText, {marginLeft: 30}]}> Age: </Text>
+            <TextInput 
+              style={[styles.textInput, {width:50}]}
+              onChangeText={text => setAge(text)}
+              value={age}
+              ></TextInput>
           </View>
           <View style={styles.inputRow}>
-            <Text>Fav Activity: </Text>
-            <TextInput style={[styles.textInput, {width:156}]}></TextInput>
+            <Text style={[styles.itemText, {marginLeft: 30, marginTop: 10}]}>Fav Activity: </Text>
+            <TextInput 
+              style={[styles.textInput, {width:190, marginTop: 10}]}
+              onChangeText={text => setFavActivity(text)}
+              value={favActivity}
+              ></TextInput>
             
           </View>
+
+          <TouchableHighlight
+
+            onPress={handleAdd}
+
+            style={[styles.button, {marginLeft: 30, marginTop: 10}]}  
+
+            underlayColor={colors.dark}>
+
+            <View style={{alignItems: 'center'}}>
+
+              <Text style={styles.buttonText}>Add Friend</Text>
+
+            </View>
+
+          </TouchableHighlight>
 
           
         </View>
@@ -119,7 +183,7 @@ export default function App() {
 
     friendInputContainer: {
       backgroundColor: colors.medium,
-      height: 75,
+      height: 110,
       width: '100%',
       padding: 10,
       marginBottom: 5,
@@ -155,5 +219,16 @@ export default function App() {
     text: {
       color: colors.primary,
       fontSize: 20,
+    },
+
+
+    button:{
+      backgroundColor: colors.secondary,
+
+      height: 25,
+
+      width: '35%',
+
+      justifyContent: 'center',
     }
   });
