@@ -8,6 +8,7 @@ import colors from './app/config/colors';
 import ListItem from './app/components/ListItem';
 import ListItemSeparator from './app/components/ListItemSeparator';
 import ListItemDeleteAction from './app/components/ListItemDeleteAction';
+import AddFriendComponent from './app/components/AddFriendComponent';
 
 
 export default function App() {
@@ -78,24 +79,11 @@ export default function App() {
       Last, call setId to update the id value for next friend to be added
     */
 
-    const handleAdd = () => {
-      const newFriend = {
-        id: id,
-        name: name,
-        age: age,
-        favActivity: favActivity,
-        
-      }
-
-      // ... is the spread operator
-      // essentially we are saying take the whole friends array
-      // add newFriend to the end
+    const handleAdd = (newFriend) => {
+      // this function will get newFriend from
+      // AddFriendComponent
       setFriends([...friends, newFriend]);
-      setId(id + 1);
-      setName('');
-      setAge('');
-      setFavActivity('');
-      Keyboard.dismiss();
+      
 
     }
   
@@ -103,7 +91,7 @@ export default function App() {
       <View style={styles.container}>
         <Text style={[styles.text, {fontWeight: 'bold'}]}>My Friends</Text>
 
-        <View style={styles.friendInputContainer}>
+        {/* <View style={styles.friendInputContainer}>
           <View style={styles.inputRow}>
             <Text style={[styles.itemText, {marginLeft: 30}]}>Name: </Text>
             <TextInput 
@@ -145,8 +133,11 @@ export default function App() {
           </TouchableHighlight>
 
           
-        </View>
-
+        </View> */}
+        <AddFriendComponent
+          handleAdd={handleAdd}
+          startingId = {initialFriends.length + 1}
+        />
   
         <FlatList
           data = {friends}
